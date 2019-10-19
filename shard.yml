@@ -1,0 +1,13 @@
+name: mastodon_intake_debugging
+version: 0.1.0
+
+authors:
+  - Jamie Gaskins <jgaskins@gmail.com>
+
+targets:
+  mastodon_intake_debugging:
+    main: src/mastodon_intake_debugging.cr
+
+crystal: 0.31.1
+
+license: MIT
