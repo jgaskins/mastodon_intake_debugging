@@ -30,4 +30,4 @@ server = HTTP::Server.new do |context|
   context.response.status = HTTP::Status::INTERNAL_SERVER_ERROR
 end
 
-server.listen "0.0.0.0", ENV.fetch("PORT") { "5000" }.to_i
+server.listen "0.0.0.0", ENV.fetch("PORT") { "3000" }.to_i

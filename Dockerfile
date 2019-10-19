@@ -5,6 +5,6 @@ WORKDIR /src
 
 RUN shards build --production
 
-EXPOSE 5000/tcp
+EXPOSE 3000/tcp
 
 CMD ["bin/mastodon_intake_debugging"]
