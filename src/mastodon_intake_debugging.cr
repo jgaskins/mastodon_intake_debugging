@@ -8,26 +8,28 @@ end
 server = HTTP::Server.new do |context|
   request = context.request
 
-  pp(
-    method: request.method,
-    path: request.path,
-    headers: request.headers,
-    query: request.query_params,
-  )
+  if request.path != "/health"
+    pp(
+      method: request.method,
+      path: request.path,
+      headers: request.headers,
+      query: request.query_params,
+    )
 
-  if context.request.headers["Content-Type"]? =~ /json/
-    case body = request.body
-    when String
-      pp json: JSON.parse(body)
-    when IO
-      pp json: JSON.parse(body.gets_to_end)
+    if context.request.headers["Content-Type"]? =~ /json/
+      case body = request.body
+      when String
+        pp json: JSON.parse(body)
+      when IO
+        pp json: JSON.parse(body.gets_to_end)
+      end
+    else
+      pp body: request.body
     end
-  else
-    pp body: request.body
-  end
 
-  # Try to get the calling instance to rerun this request
-  context.response.status = HTTP::Status::INTERNAL_SERVER_ERROR
+    # Try to get the calling instance to rerun this request
+    context.response.status = HTTP::Status::INTERNAL_SERVER_ERROR
+  end
 end
 
 server.listen "0.0.0.0", ENV.fetch("PORT") { "3000" }.to_i
